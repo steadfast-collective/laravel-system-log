@@ -56,7 +56,6 @@ class HasSystemLoggerTest extends TestCase
  *
  * @mixin \Eloquent
  */
-
 class TestModel extends Model
 {
     use HasSystemLogger;
