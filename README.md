@@ -103,7 +103,29 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+Bugs, Suggestions and PRs are welcome. Any new functionality must include tests. Get in touch if you'd like to contribute but aren't sure how.
+
+## Git Hooks
+While developing it's recommended you setup a git-hook to ensure you always have the correct versions and dependencies
+
+Call the shared post-checkout hook when you checkout or update your branch:
+
+```bash
+echo "./scripts/git-hooks/post-checkout \"\$@\"" >> .git/hooks/post-checkout
+chmod +x .git/hooks/post-checkout
+echo "./scripts/git-hooks/post-update \"\$@\"" >> .git/hooks/post-update
+chmod +x .git/hooks/post-update
+```
+
+If you need to manually the hook you can simply run it `./scripts/git-hooks-post-update`
+
+(beta) It's also a good idea to run code-style checks when you commit. This is a work in progress hook, the workflow could be smoother:
+
+```bash
+echo "./scripts/git-hooks/pre-commit \"\$@\"" >> .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
 
 ## Security Vulnerabilities
 
