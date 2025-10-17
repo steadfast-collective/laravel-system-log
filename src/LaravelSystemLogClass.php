@@ -2,6 +2,4 @@
 
 namespace SteadfastCollective\LaravelSystemLog;
 
-class LaravelSystemLogClass
-{
-}
+class LaravelSystemLogClass {}
