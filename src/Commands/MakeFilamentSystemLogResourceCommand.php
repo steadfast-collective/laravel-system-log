@@ -4,11 +4,11 @@ namespace SteadfastCollective\LaravelSystemLog\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelSystemLogCommand extends Command
+class MakeFilamentSystemLogResourceCommand extends Command
 {
-    public $signature = 'laravel-system-log';
+    public $signature = 'system-log:make-filament-resource';
 
-    public $description = 'My command';
+    public $description = 'Generate a Filament Resource for managing your System Logs';
 
     public function handle(): int
     {
