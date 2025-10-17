@@ -16,10 +16,10 @@ class LaravelSystemLogServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-system-log')
+            ->name('system-log')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel_system_log_table')
+            ->discoversMigrations()
             ->hasCommand(LaravelSystemLogCommand::class);
     }
 }

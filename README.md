@@ -26,6 +26,19 @@ You can install the package via composer:
 composer require steadfast-collective/laravel-system-log
 ```
 
+Publish and run the migrations to create the system_logs table:
+
+```bash
+php artisan vendor:publish --tag="system-log-migrations"
+php artisan migrate
+```
+
+Publish and run the migrations to create the system_logs table:
+
+```bash
+php artisan system-log:make-filament-resource
+```
+
 ## Usage
 You can add HasSystemLogger to any model you want to easily log from.
 
