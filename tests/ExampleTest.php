@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace SteadfastCollective\LaravelSystemLog\Tests;
 
 use PHPUnit\Framework\TestCase;
 
