@@ -44,5 +44,8 @@ jobs:
       - name: List Installed Dependencies
         run: composer show -D
 
+      - name: Run Static Analysis
+        run: vendor/bin/phpstan
+
       - name: Execute tests
         run: vendor/bin/phpunit
