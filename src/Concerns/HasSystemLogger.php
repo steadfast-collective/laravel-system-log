@@ -49,6 +49,7 @@ trait HasSystemLogger
     public function getInternalId(): string
     {
         ray('here', $this->getKey());
+
         return (string) $this->getKey();
     }
 

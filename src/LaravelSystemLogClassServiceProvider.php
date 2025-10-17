@@ -2,9 +2,6 @@
 
 namespace SteadfastCollective\LaravelSystemLog;
 
-use Illuminate\Support\Facades\Route;
-use Spatie\Example\Commands\ExampleCommand;
-use Spatie\Example\Http\Controllers\MyController;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,8 +15,5 @@ class LaravelSystemLogClassServiceProvider extends PackageServiceProvider
             ->hasMigration('create_my_models_table');
     }
 
-    public function packageRegistered()
-    {
-
-    }
+    public function packageRegistered() {}
 }

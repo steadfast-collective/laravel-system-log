@@ -5,7 +5,6 @@ namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLogger;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLoggerAssertions;
-use SteadfastCollective\LaravelSystemLog\Models\SystemLog;
 use SteadfastCollective\LaravelSystemLog\Tests\TestCase;
 
 class HasSystemLoggerTest extends TestCase
@@ -38,7 +37,7 @@ class HasSystemLoggerTest extends TestCase
             context: [
                 'some context' => [
                     'can be stored' => 'here',
-                ]
+                ],
             ]
         );
 
@@ -47,7 +46,7 @@ class HasSystemLoggerTest extends TestCase
             context: [
                 'some context' => [
                     'can be stored' => 'here',
-                ]
+                ],
             ]
         );
     }
