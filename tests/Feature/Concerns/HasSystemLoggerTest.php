@@ -14,14 +14,14 @@ class HasSystemLoggerTest extends TestCase
     public function test_create_simple_system_log()
     {
         $model = new TestModel;
-        $model->id = fake()->randomNumber();
+        $model->id = 12345;
 
         $model->addSystemLog('This is a test message');
 
         $this->assertSystemLogLogged(
             message: 'This is a test message',
             internalType: 'SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\TestModel',
-            internalId: (string) $model->id,
+            internalId: '12345',
             externalType: 'TestModel',
             externalId: 'my_external_id',
         );
