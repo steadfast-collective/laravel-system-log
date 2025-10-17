@@ -45,10 +45,11 @@ class SystemLog extends Model
         'resolved' => 'boolean',
     ];
 
-    public function retryingUser()
-    {
-        return $this->belongsTo(User::class, 'retried_by');
-    }
+    // TODO: Reintroduce Retrying User
+    // public function retryingUser()
+    // {
+    //     return $this->belongsTo(User::class, 'retried_by');
+    // }
 
     public function internalModel(): MorphTo
     {
