@@ -2,57 +2,36 @@
 
 namespace SteadfastCollective\LaravelSystemLog\Tests;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
+use SteadfastCollective\LaravelSystemLog\LaravelSystemLogServiceProvider;
 
-abstract class TestCase extends Orchestra
+class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
         parent::setUp();
 
-        // Factory::guessFactoryNamesUsing(
-        //     fn (string $modelName) => 'Patabugen\\MssqlChanges\\Tests\\Fixtures\Database\\Factories\\'.class_basename($modelName)
-        //         .'Factory'
-        // );
+        Factory::guessFactoryNamesUsing(
+            fn (string $modelName) => 'SteadfastCollective\\LaravelSystemLog\\Database\\Factories\\'.class_basename($modelName).'Factory'
+        );
     }
 
-    protected function defineDatabaseMigrations()
+    protected function getPackageProviders($app)
     {
-        $this->artisan('migrate:fresh')->run();
-        $this->loadMigrationsFrom(base_path('database/migrations'));
+        return [
+            LaravelSystemLogServiceProvider::class,
+        ];
     }
 
-    // protected function getPackageProviders($app)
-    // {
-    //     return [
-    //         MssqlChangesServiceProvider::class,
-    //         \Spatie\LaravelRay\RayServiceProvider::class,
-    //     ];
-    // }
-
-    public function defineEnvironment($app)
+    public function getEnvironmentSetUp($app)
     {
-        $this->defineDatabaseMigrations();
-    }
+        config()->set('database.default', 'testing');
 
-    //     config()->set('database.connections.default', [
-    //         'driver' => env('DB_DRIVER', 'sqlsrv'),
-    //         'host' => env('DB_HOST', 'sqlsrv'),
-    //         'port' => env('DB_PORT', '1433'),
-    //         'database' => env('DB_DATABASE', 'LaravelMssqlChangesTest'),
-    //         'username' => env('DB_USERNAME', 'sa'),
-    //         'password' => env('DB_PASSWORD', 'password'),
-    //         'url' => '',
-    //         'charset' => 'utf8mb4',
-    //         'collation' => 'utf8mb4_unicode_ci',
-    //         'prefix' => '',
-    //         'prefix_indexes' => true,
-    //         'strict' => true,
-    //         'engine' => null,
-    //         'trust_server_certificate' => true,
-    //         'options' => [
-    //             'TrustServerCertificate' => '1',
-    //         ],
-    //     ]);
-    // }
+        /*
+         foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/../database/migrations') as $migration) {
+            (include $migration->getRealPath())->up();
+         }
+         */
+    }
 }

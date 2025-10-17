@@ -1,18 +1,13 @@
 includes:
-    - vendor/larastan/larastan/extension.neon
-    - vendor/nesbot/carbon/extension.neon
+    - phpstan-baseline.neon
 
 parameters:
-
-    paths:
-        - src/
-        - tests/
-
-    # Level 10 is the highest level
     level: 5
-
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
+    paths:
+        - src
+        - config
+        - database
+        - tests
+    tmpDir: build/phpstan
+    checkOctaneCompatibility: true
+    checkModelProperties: true
