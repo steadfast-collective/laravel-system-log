@@ -68,15 +68,23 @@ trait HasSystemLogger
     }
 
     /**
-     * As a convenience we can pass a model into addSystemLog instead of having to define
+     * As a convenience we can pass an object into addSystemLog instead of having to define
      * the internal/external types and IDs every time. This method infers those values
-     * from the given model and returns an array we can merge before creting the Log.
+     * from the given object and updates the new system log.
      */
     private function inferFromClass(Model $model)
     {
-        $this->newSystemLog->internal_id = $model->getInternalId();
-        $this->newSystemLog->internal_type = $model->getInternalType();
-        $this->newSystemLog->external_id = $model->getExternalId();
-        $this->newSystemLog->external_type = $model->getExternalType();
+        if (is_callable([$model, 'getInternalId'])) {
+            $this->newSystemLog->internal_id = $model->getInternalId();
+        }
+        if (is_callable([$model, 'getInternalType'])) {
+            $this->newSystemLog->internal_type = $model->getInternalType();
+        }
+        if (is_callable([$model, 'getExternalId'])) {
+            $this->newSystemLog->external_id = $model->getExternalId();
+        }
+        if (is_callable([$model, 'getExternalType'])) {
+            $this->newSystemLog->external_type = $model->getExternalType();
+        }
     }
 }
