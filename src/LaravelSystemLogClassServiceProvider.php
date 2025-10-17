@@ -13,19 +13,13 @@ class LaravelSystemLogClassServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-example')
+            ->name('laravel-system-log')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_my_models_table')
-            ->hasCommand(ExampleCommand::class);
+            ->hasMigration('create_my_models_table');
     }
 
     public function packageRegistered()
     {
-        Route::macro('example', function (string $baseUrl = 'example') {
-            Route::prefix($baseUrl)->group(function () {
-                Route::get('/', [MyController::class, 'index']);
-            });
-        });
+
     }
 }

@@ -6,14 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('laravel_system_log_table', function (Blueprint $table) {
+        Schema::create('system_logs', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('internal_type')->nullable()->index();
+            $table->string('internal_id')->nullable()->index();
+            $table->string('external_type')->nullable()->index();
+            $table->string('external_id')->nullable()->index();
+            $table->string('log_level')->nullable()->index();
+            $table->string('message')->nullable();
+            $table->json('context')->nullable()->index();
+            $table->string('notes')->nullable()->index();
+            $table->string('retried_at')->nullable()->index();
+            $table->string('retried_by')->nullable()->index();
+            $table->string('resolved')->nullable()->index();
             $table->timestamps();
         });
+    }
+
+    public function down(): void
+    {
+        Schema::drop('system_logs');
     }
 };

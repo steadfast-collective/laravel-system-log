@@ -22,22 +22,23 @@ trait HasSystemLogger
         ?Model $model = null,
     ) {
         $this->newSystemLog = new SystemLog([
-            'internal_type' => $internalType,
-            'internal_id' => $internalId,
-            'external_type' => $externalType,
-            'external_id' => $externalId,
+            'internal_type' => $internalType ?? $this->getInternalType(),
+            'internal_id' => $internalId ?? $this->getInternalId(),
+            'external_type' => $externalType ?? $this->getExternalType(),
+            'external_id' => $externalId ?? $this->getExternalId(),
             'log_level' => $level,
             'message' => $message,
             'context' => $context,
         ]);
 
         if ($model) {
-            $this->inferFromModel($model);
+            $this->inferFromClass($model);
         }
 
         Log::$level('[SystemLog] '.$message);
 
         $this->newSystemLog->save();
+        ray($this->newSystemLog);
 
         // Clear the system-log-internal-type-options
         Cache::forget('system-log-internal-type-options');
@@ -47,7 +48,8 @@ trait HasSystemLogger
 
     public function getInternalId(): string
     {
-        return (string) $this->key();
+        ray('here', $this->getKey());
+        return (string) $this->getKey();
     }
 
     public function getInternalType(): string
@@ -71,10 +73,10 @@ trait HasSystemLogger
      * the internal/external types and IDs every time. This method infers those values
      * from the given model and returns an array we can merge before creting the Log.
      */
-    private function inferFromModel(Model $model)
+    private function inferFromClass(Model $model)
     {
-        $this->newSystemLog->internal_id = $model->getKey();
-        $this->newSystemLog->internal_type = $model::class;
+        $this->newSystemLog->internal_id = $model->getInternalId();
+        $this->newSystemLog->internal_type = $model->getInternalType();
         $this->newSystemLog->external_id = $model->getExternalId();
         $this->newSystemLog->external_type = $model->getExternalType();
     }
