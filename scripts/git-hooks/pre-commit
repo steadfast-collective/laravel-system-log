@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+$php = "php";
+
+$pintResult = null;
+$phpstanResult = null;
+
+passthru('vendor/bin/pint --dirty', $pintResult);
+passthru("{$php} vendor/bin/phpstan", $phpstanResult);
+
+// If everything above exited 0, then we'll exit 0 too.
+exit ($pintResult + $phpstanResult);

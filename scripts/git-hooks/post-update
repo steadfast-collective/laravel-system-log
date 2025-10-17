@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+#
+# Builds our assets upon checkout
+#
+# Args passed to this are:
+# $1 - Previous HEAD
+# $2 - New HEAD
+# $3 - 1 if checking out a branch, 0 if checking out something else, such as a file (rollbacks)
+#
+
+$php = "php";
+$npm = "npm";
+$composer = "composer";
+
+/**
+ * Output a visually distinct header
+*/
+function echoHeader($text) {
+    echo "\n";
+    echo "\e[42m            \e[0m";
+    echo " {$text} ";
+    echo "\e[0m";
+    echo "\n";
+}
+
+echoHeader("Composer Install");
+passthru("{$composer} install");
