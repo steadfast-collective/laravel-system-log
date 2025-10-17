@@ -60,10 +60,7 @@
         "laravel": {
             "providers": [
                 "SteadfastCollective\\LaravelSystemLog\\LaravelSystemLogServiceProvider"
-            ],
-            "aliases": {
-                "LaravelSystemLog": "SteadfastCollective\\LaravelSystemLog\\Facades\\LaravelSystemLog"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
