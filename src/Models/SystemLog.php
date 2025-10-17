@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string|null $retried_at
  * @property string|null $retried_by
  * @property string|null $resolved
+ *
+ * @mixin \Eloquent
  */
 class SystemLog extends Model
 {

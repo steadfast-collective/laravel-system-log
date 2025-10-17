@@ -51,6 +51,11 @@ class HasSystemLoggerTest extends TestCase
         );
     }
 }
+/**
+ * @property int|null $id
+ *
+ * @mixin \Eloquent
+ */
 
 class TestModel extends Model
 {
