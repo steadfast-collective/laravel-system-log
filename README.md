@@ -56,7 +56,7 @@ class Product extends Model
         return $this->key();
     }
 
-    public function getInternalId()
+    public function getInternalType()
     {
         return get_class($this);
     }
