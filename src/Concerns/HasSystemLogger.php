@@ -5,11 +5,11 @@ namespace SteadfastCollective\LaravelSystemLog\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use SteadfastCollective\LaravelSystemLog\Models\SystemLog;
 
 trait HasSystemLogger
 {
-    private SystemLog $newSystemLog;
+    /** @var \SteadfastCollective\LaravelSystemLog\Models\SystemLog */
+    private $newSystemLog;
 
     public function addSystemLog(
         string $message,
@@ -21,7 +21,9 @@ trait HasSystemLogger
         ?string $externalId = null,
         ?Model $model = null,
     ) {
-        $this->newSystemLog = new SystemLog([
+        /** @var class-string<\SteadfastCollective\LaravelSystemLog\Models\SystemLog> $systemLogClass */
+        $systemLogClass = config('system-log.class');
+        $this->newSystemLog = new $systemLogClass([
             'internal_type' => $internalType ?? $this->getInternalType(),
             'internal_id' => $internalId ?? $this->getInternalId(),
             'external_type' => $externalType ?? $this->getExternalType(),
@@ -38,7 +40,6 @@ trait HasSystemLogger
         Log::$level('[SystemLog] '.$message);
 
         $this->newSystemLog->save();
-        ray($this->newSystemLog);
 
         // Clear the system-log-internal-type-options
         Cache::forget('system-log-internal-type-options');

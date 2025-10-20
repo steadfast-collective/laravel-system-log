@@ -1,6 +1,5 @@
 <?php
 
-// config for SteadfastCollective/LaravelSystemLog
 return [
-
+    'class' => 'App\Models\SystemLog',
 ];
