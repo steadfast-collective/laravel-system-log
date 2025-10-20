@@ -34,6 +34,11 @@ class InstallSystemLogs extends Command
             app_path('Models/'),
         );
 
+        $this->publishStub(
+            'database/factories/SystemLogFactory.php',
+            database_path('factories/'),
+        );
+
         if (! class_exists("Filament\Commands\MakeResourceCommand")) {
             $this->info('Not creating Filament Resources because they do not exist');
         }
