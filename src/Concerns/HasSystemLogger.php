@@ -37,7 +37,14 @@ trait HasSystemLogger
             $this->inferFromClass($model);
         }
 
-        Log::$level('[SystemLog] '.$message);
+        // If this class has a method for formatting/prefixing log messages
+        // then use it. Designed for use with Steadfast Collective's (currently
+        // internal) HasLogger trait.
+        if (is_callable([$this, 'makeLogMessage'])) {
+            $message = $this->makeLogMessage($message);
+        }
+
+        Log::$level($message);
 
         $this->newSystemLog->save();
 

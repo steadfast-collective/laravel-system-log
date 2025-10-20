@@ -97,6 +97,26 @@ The `SystemLog` model will have some properties set:
 | message       | Any string of your choosing (required)                      | A description of what is being logged                          |
 | context       | An array of related data                                    | Any other data you want to include with this logger            |
 
+### Formatting your log lines
+When you create a SystemLog the message will also be logged to the standard Larvel logger.
+
+You can customise this message by adding a `makeLogMessage` method to your class.
+
+For example to prefix the log message with the class name wrapped in square brackes:
+
+```php
+class MyClass
+{
+    use HasSystemLogger;
+
+    public function makeLogMessage(string $message): string
+    {
+        return '['.class_basename($this).'] '.$message;
+    }
+}
+```
+
+
 ## Testing
 
 ```bash
