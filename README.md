@@ -33,6 +33,8 @@ Filament panel it's added to.
 php artisan system-log:install
 ```
 
+The generated model and panel are now ready for you to customise to fit into your application.
+
 ## Usage
 You can add HasSystemLogger to any model you want to easily log from.
 
