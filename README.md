@@ -33,10 +33,12 @@ php artisan vendor:publish --tag="system-log-migrations"
 php artisan migrate
 ```
 
-Publish and run the migrations to create the system_logs table:
+Run the install command to publish the model and factory, and if you have Filament
+installed to create to resource. Use the `--panel=Admin` option to customise which
+Filament panel it's added to.
 
 ```bash
-php artisan system-log:make-filament-resource
+php artisan system-log:install
 ```
 
 ## Usage
