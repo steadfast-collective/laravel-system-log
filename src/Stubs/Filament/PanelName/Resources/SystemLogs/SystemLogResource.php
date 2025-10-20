@@ -1,0 +1,54 @@
+<?php
+
+namespace SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs;
+
+use App\Models\SystemLog;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Pages\EditSystemLog;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Pages\ListSystemLogs;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Pages\ViewSystemLog;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Schemas\SystemLogForm;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Schemas\SystemLogInfolist;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Tables\SystemLogsTable;
+
+class SystemLogResource extends Resource
+{
+    protected static ?string $model = SystemLog::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static function form(Schema $schema): Schema
+    {
+        return SystemLogForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return SystemLogInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return SystemLogsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListSystemLogs::route('/'),
+            'view' => ViewSystemLog::route('/{record}'),
+            'edit' => EditSystemLog::route('/{record}/edit'),
+        ];
+    }
+}

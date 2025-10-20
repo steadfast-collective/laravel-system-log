@@ -4,7 +4,7 @@ namespace SteadfastCollective\LaravelSystemLog;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use SteadfastCollective\LaravelSystemLog\Commands\MakeFilamentSystemLogResourceCommand;
+use SteadfastCollective\LaravelSystemLog\Commands\InstallSystemLogs;
 
 class LaravelSystemLogServiceProvider extends PackageServiceProvider
 {
@@ -16,6 +16,6 @@ class LaravelSystemLogServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasCommands()
             ->discoversMigrations()
-            ->hasCommand(MakeFilamentSystemLogResourceCommand::class);
+            ->hasCommand(InstallSystemLogs::class);
     }
 }
