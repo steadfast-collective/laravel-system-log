@@ -11,7 +11,6 @@ use Filament\Tables\Table;
 use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Pages\EditSystemLog;
 use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Pages\ListSystemLogs;
 use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Schemas\SystemLogForm;
-use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Schemas\SystemLogInfolist;
 use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Tables\SystemLogsTable;
 
 class SystemLogResource extends Resource
@@ -23,11 +22,6 @@ class SystemLogResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return SystemLogForm::configure($schema);
-    }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return SystemLogInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
