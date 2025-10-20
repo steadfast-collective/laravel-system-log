@@ -132,7 +132,7 @@ echo "./scripts/git-hooks/post-update \"\$@\"" >> .git/hooks/post-update
 chmod +x .git/hooks/post-update
 ```
 
-If you need to manually the hook you can simply run it `./scripts/git-hooks-post-update`
+If you need to manually run the hook you can simply run it `./scripts/git-hooks-post-update`
 
 (beta) It's also a good idea to run code-style checks when you commit. This is a work in progress hook, the workflow could be smoother:
 
