@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('message')->nullable();
             $table->json('context')->nullable();
             $table->string('notes')->nullable()->index();
-            $table->string('retried_at')->nullable()->index();
+            $table->timestamp('retried_at')->nullable()->index();
             $table->string('retried_by')->nullable()->index();
             $table->boolean('resolved')->nullable()->index();
             $table->timestamps();
