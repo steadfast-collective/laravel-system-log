@@ -1,6 +1,6 @@
 {
     "name": "steadfast-collective/laravel-system-log",
-    "description": "Provides a System Log model and helpers for contextful logging with FilamentPHP compatibility ",
+    "description": "Provides a System Log model and helpers for contextful logging with a FilamentPHP Resource panel generator",
     "keywords": [
         "Steadfast Collective",
         "laravel",

@@ -2,19 +2,21 @@
 
 namespace SteadfastCollective\LaravelSystemLog\Commands;
 
+use Filament\Support\Commands\Concerns\HasPanel;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 
 class InstallSystemLogs extends Command
 {
+    use HasPanel;
+
     public $signature = 'system-log:install {--panel=Admin}';
 
     public $description = 'Install System Logs';
 
     protected $files;
 
-    protected string $filamentNamespace = '';
+    protected string $resourcesNamespace = '';
 
     protected string $namespace = 'App';
 
@@ -26,8 +28,9 @@ class InstallSystemLogs extends Command
 
     public function handle(): int
     {
-        // Create the local SystemLog model
-        $panel = 'pdmin';
+        $this->configurePanel(question: 'Which panel would you like to create this resource in?');
+        $path = $this->panel->getResourceDirectories()[0].'/SystemLogs';
+        $this->resourcesNamespace = $this->panel->getResourceNamespaces()[0];
 
         $this->publishStub(
             'Models/SystemLog.php',
@@ -38,14 +41,6 @@ class InstallSystemLogs extends Command
             'database/factories/SystemLogFactory.php',
             database_path('factories/'),
         );
-
-        if (! class_exists("Filament\Commands\MakeResourceCommand")) {
-            $this->info('Not creating Filament Resources because they do not exist');
-        }
-
-        $panel = Str::of($this->option('panel'))->title()->toString();
-        $this->filamentNamespace = "App\Filament\\{$panel}";
-        $path = app_path("Filament/{$panel}/Resources/SystemLogs");
 
         $this->makeDirectory($path.'/Resources');
         $this->makeDirectory($path.'/Resources/SystemLogs');
@@ -67,10 +62,6 @@ class InstallSystemLogs extends Command
         );
         $this->publishStub(
             'Filament/PanelName/Resources/SystemLogs/Schemas/SystemLogForm.php',
-            "{$path}/Schemas/",
-        );
-        $this->publishStub(
-            'Filament/PanelName/Resources/SystemLogs/Schemas/SystemLogInfolist.php',
             "{$path}/Schemas/",
         );
         $this->publishStub(
@@ -96,7 +87,7 @@ class InstallSystemLogs extends Command
         $stub = $this->files->get(__DIR__.'/../stubs/'.$source);
 
         // Replace Filament-specific namespaces first (so they can include the Panel Name)
-        $stub = str_replace('SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName', $this->filamentNamespace, $stub);
+        $stub = str_replace('SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources', $this->resourcesNamespace, $stub);
 
         // Replace generic namespaces
         $stub = str_replace('SteadfastCollective\LaravelSystemLog\Stubs', $this->namespace, $stub);
