@@ -35,7 +35,7 @@ class RangeFilter extends Filter
         $this->rangeFilterNames->toField = $name.'_to';
         $this->rangeFilterNames->label = $alternateName ?? $this->getLabel();
 
-        // We can create range filters which use a Text input, or a range inpout.
+        // We can create range filters which use a Text input, or a range input.
         switch ($format) {
             case TextInput::class:
                 $this->schema([
