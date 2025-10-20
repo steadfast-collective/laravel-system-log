@@ -21,9 +21,10 @@
         "illuminate/contracts": "^11.0||^12.0"
     },
     "require-dev": {
+        "filament/filament": "^4.1",
+        "larastan/larastan": "^3.0",
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.8",
-        "larastan/larastan": "^3.0",
         "orchestra/testbench": "^10.0.0||^9.0.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
