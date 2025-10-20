@@ -57,7 +57,6 @@ trait HasSystemLoggerAssertions
         throw_if(empty($where), new \Exception('No fields to search for in System Log Assertions'));
 
         // Look for the log we expect - but without the context just yet.
-        ray($where);
         $expectedSystemLog = SystemLog::where($where)->first();
 
         // If we didn't find anything and if we can call the assertDatabaseHasSystemLog method, call it
