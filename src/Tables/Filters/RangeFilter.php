@@ -38,13 +38,13 @@ class RangeFilter extends Filter
         // We can create range filters which use a Text input, or a range inpout.
         switch ($format) {
             case TextInput::class:
-                $this->form([
+                $this->schema([
                     TextInput::make($this->rangeFilterNames->fromField)->label($this->rangeFilterNames->label.': From'),
                     TextInput::make($this->rangeFilterNames->toField)->label($this->rangeFilterNames->label.': To'),
                 ]);
                 break;
             case DatePicker::class:
-                $this->form([
+                $this->schema([
                     DatePicker::make($this->rangeFilterNames->fromField)->label($this->rangeFilterNames->label.': From')->native(false),
                     DatePicker::make($this->rangeFilterNames->toField)->label($this->rangeFilterNames->label.': To')->native(false),
                 ]);
