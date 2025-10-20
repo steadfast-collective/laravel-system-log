@@ -59,11 +59,9 @@ class InstallSystemLogs extends Command
             database_path('factories/'),
         );
 
-        $this->makeDirectory($path.'/Resources');
-        $this->makeDirectory($path.'/Resources/SystemLogs');
-        $this->makeDirectory($path.'/Resources/SystemLogs/Pages');
-        $this->makeDirectory($path.'/Resources/SystemLogs/Schemas');
-        $this->makeDirectory($path.'/Resources/SystemLogs/Tables');
+        $this->makeDirectory($path.'/Pages/');
+        $this->makeDirectory($path.'/Schemas');
+        $this->makeDirectory($path.'/Tables');
 
         $this->publishStub(
             'Filament/PanelName/Resources/SystemLogs/SystemLogResource.php',
@@ -91,9 +89,8 @@ class InstallSystemLogs extends Command
 
     private function makeDirectory($path)
     {
-        if (! $this->files->isDirectory(dirname($path))) {
-            $this->files->makeDirectory(dirname($path), 0755, true, true);
-        }
+        $this->info("Ensuring [$path] exists.");
+        $this->files->ensureDirectoryExists($path, recursive: true);
     }
 
     private function publishStub($source, $destination)
