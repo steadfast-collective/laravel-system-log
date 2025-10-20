@@ -4,7 +4,11 @@
     "keywords": [
         "Steadfast Collective",
         "laravel",
-        "laravel-system-log"
+        "laravel-system-log",
+        "laravel-logging",
+        "api-tracking",
+        "debugging",
+        "audit-trail"
     ],
     "homepage": "https://github.com/steadfast-collective/laravel-system-log",
     "license": "MIT",
