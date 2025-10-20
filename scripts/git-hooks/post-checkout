@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Builds our assets upon checkout
+#
+# Args passed to this are:
+# $1 - Previous HEAD
+# $2 - New HEAD
+# $3 - 1 if checking out a branch, 0 if checking out something else, such as a file (rollbacks)
+#
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+if [ '1' == "$3" ]
+then
+    echo 'Branch checkout detected. Updating and building assets...'
+
+    ## Make sure we've got the latest changes from the repo
+    git pull
+
+    "$DIR/post-update"
+fi

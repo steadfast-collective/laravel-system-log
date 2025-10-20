@@ -26,6 +26,21 @@ You can install the package via composer:
 composer require steadfast-collective/laravel-system-log
 ```
 
+Publish and run the migrations to create the system_logs table:
+
+```bash
+php artisan vendor:publish --tag="system-log-migrations"
+php artisan migrate
+```
+
+Run the install command to publish the model and factory, and if you have Filament
+installed to create to resource. Use the `--panel=Admin` option to customise which
+Filament panel it's added to.
+
+```bash
+php artisan system-log:install
+```
+
 ## Usage
 You can add HasSystemLogger to any model you want to easily log from.
 
@@ -56,7 +71,7 @@ class Product extends Model
         return $this->key();
     }
 
-    public function getInternalId()
+    public function getInternalType()
     {
         return get_class($this);
     }
@@ -103,7 +118,29 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+Bugs, Suggestions and PRs are welcome. Any new functionality must include tests. Get in touch if you'd like to contribute but aren't sure how.
+
+## Git Hooks
+While developing it's recommended you setup a git-hook to ensure you always have the correct versions and dependencies
+
+Call the shared post-checkout hook when you checkout or update your branch:
+
+```bash
+echo "./scripts/git-hooks/post-checkout \"\$@\"" >> .git/hooks/post-checkout
+chmod +x .git/hooks/post-checkout
+echo "./scripts/git-hooks/post-update \"\$@\"" >> .git/hooks/post-update
+chmod +x .git/hooks/post-update
+```
+
+If you need to manually the hook you can simply run it `./scripts/git-hooks-post-update`
+
+(beta) It's also a good idea to run code-style checks when you commit. This is a work in progress hook, the workflow could be smoother:
+
+```bash
+echo "./scripts/git-hooks/pre-commit \"\$@\"" >> .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
 
 ## Security Vulnerabilities
 
