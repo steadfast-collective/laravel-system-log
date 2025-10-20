@@ -10,14 +10,29 @@ class InstallSystemLogs extends Command
 {
     use HasPanel;
 
-    public $signature = 'system-log:install {--panel=Admin}';
+    public $signature = 'system-log:install {--panel=Admin} {--force}';
 
     public $description = 'Install System Logs';
 
-    protected $files;
+    /**
+     * Whether to overwrite files if they already exist
+     */
+    protected bool $force = false;
 
+    /**
+     * Filesystem handle for reading/writing files.
+     */
+    protected Filesystem $files;
+
+    /**
+     * The namespace prefix for Resource files, which we use to overwrite the placeholders
+     * set in our stub files.
+     */
     protected string $resourcesNamespace = '';
 
+    /**
+     * The namespace prefix for the app overall - used for setting the Models namespace.
+     */
     protected string $namespace = 'App';
 
     public function __construct(Filesystem $files)
@@ -28,6 +43,8 @@ class InstallSystemLogs extends Command
 
     public function handle(): int
     {
+        $this->force = $this->option('force');
+
         $this->configurePanel(question: 'Which panel would you like to create this resource in?');
         $path = $this->panel->getResourceDirectories()[0].'/SystemLogs';
         $this->resourcesNamespace = $this->panel->getResourceNamespaces()[0];
@@ -84,6 +101,13 @@ class InstallSystemLogs extends Command
         $filename = basename($source);
         $destination .= $filename;
 
+        if ($this->files->exists($destination)) {
+            if ($this->force !== true) {
+                $this->error("File [$destination] already exists. Skipping");
+
+                return;
+            }
+        }
         $stub = $this->files->get(__DIR__.'/../stubs/'.$source);
 
         // Replace Filament-specific namespaces first (so they can include the Panel Name)
