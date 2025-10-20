@@ -12,24 +12,21 @@ For example you might add it to an Eloquent Model which is synced over an API an
 
 ## Installation
 
-You can install the package via composer:
+You can require and setup the packge with these commands:
 
 ```bash
 composer require steadfast-collective/laravel-system-log
-```
 
-Publish and run the migrations to create the system_logs table:
-
-```bash
+# Publish and run the migrations to create the system_logs table:
 php artisan vendor:publish --tag="system-log-migrations"
 php artisan migrate
-```
 
-Run the install command to publish the model and factory, and if you have Filament
-installed to create to resource. Use the `--panel=Admin` option to customise which
-Filament panel it's added to.
+# Publish the config file (optional)
+php artisan vendor:publish --force --tag="system-log-config"
 
-```bash
+# Run the install command to publish the model and factory, and if you have Filament
+# installed to create to resource. Use the `--panel=Admin` option to customise which
+# Filament panel it's added to.
 php artisan system-log:install
 ```
 

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'class' => 'App\Models\SystemLog',
+    'class' => App\Models\SystemLog::class,
 ];
