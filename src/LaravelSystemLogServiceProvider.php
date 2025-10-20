@@ -15,7 +15,7 @@ class LaravelSystemLogServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasCommands()
-            ->discoversMigrations()
+            ->hasMigration('create_system_log_table')
             ->hasCommand(InstallSystemLogs::class);
     }
 }
