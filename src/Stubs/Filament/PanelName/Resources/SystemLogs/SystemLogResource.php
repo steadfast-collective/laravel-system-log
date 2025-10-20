@@ -10,10 +10,9 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Pages\EditSystemLog;
 use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Pages\ListSystemLogs;
-use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Pages\ViewSystemLog;
-use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Schemas\SystemLogForm;
-use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Schemas\SystemLogInfolist;
-use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Tables\SystemLogsTable;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Schemas\SystemLogForm;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Schemas\SystemLogInfolist;
+use SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Tables\SystemLogsTable;
 
 class SystemLogResource extends Resource
 {
@@ -47,7 +46,6 @@ class SystemLogResource extends Resource
     {
         return [
             'index' => ListSystemLogs::route('/'),
-            'view' => ViewSystemLog::route('/{record}'),
             'edit' => EditSystemLog::route('/{record}/edit'),
         ];
     }

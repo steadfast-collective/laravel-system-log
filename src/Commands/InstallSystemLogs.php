@@ -66,10 +66,6 @@ class InstallSystemLogs extends Command
             "{$path}/Pages/",
         );
         $this->publishStub(
-            'Filament/PanelName/Resources/SystemLogs/Pages/ViewSystemLog.php',
-            "{$path}/Pages/",
-        );
-        $this->publishStub(
             'Filament/PanelName/Resources/SystemLogs/Schemas/SystemLogForm.php',
             "{$path}/Schemas/",
         );

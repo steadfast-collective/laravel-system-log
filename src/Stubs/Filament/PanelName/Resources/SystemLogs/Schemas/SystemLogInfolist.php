@@ -1,6 +1,6 @@
 <?php
 
-namespace SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\SystemLogs\Schemas;
+namespace SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
