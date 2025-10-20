@@ -114,7 +114,7 @@ trait HasSystemLoggerAssertions
     }
 
     /**
-     * Pretty much a clone of HasSystemLogger::inferFromModelAssertionVersion - duplicatd
+     * Pretty much a clone of HasSystemLogger::inferFromModelAssertionVersion - duplicated
      * because this is a test trait and we want to... test what it's doing
      * and not just use it.
      *
