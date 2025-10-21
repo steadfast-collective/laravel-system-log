@@ -40,8 +40,8 @@ trait HasSystemLogger
         // If this class has a method for formatting/prefixing log messages
         // then use it. Designed for use with Steadfast Collective's (currently
         // internal) HasLogger trait.
-        if (is_callable([$this, 'makeLogMessage'])) {
-            $message = $this->makeLogMessage($message);
+        if (method_exists($model, 'makeLogMessage')) {
+            $message = $model->makeLogMessage($message);
         }
 
         Log::$level($message);
@@ -82,16 +82,16 @@ trait HasSystemLogger
      */
     private function inferFromClass(Model $model)
     {
-        if (is_callable([$model, 'getInternalId']) && filled($model->getInternalId())) {
+        if (method_exists($model, 'getInternalId') && filled($model->getInternalId())) {
             $this->newSystemLog->internal_id = $model->getInternalId();
         }
-        if (is_callable([$model, 'getInternalType']) && filled($model->getInternalType())) {
+        if (method_exists($model, 'getInternalType') && filled($model->getInternalType())) {
             $this->newSystemLog->internal_type = $model->getInternalType();
         }
-        if (is_callable([$model, 'getExternalId']) && filled($model->getExternalId())) {
+        if (method_exists($model, 'getExternalId') && filled($model->getExternalId())) {
             $this->newSystemLog->external_id = $model->getExternalId();
         }
-        if (is_callable([$model, 'getExternalType']) && filled($model->getExternalType())) {
+        if (method_exists($model, 'getExternalType') && filled($model->getExternalType())) {
             $this->newSystemLog->external_type = $model->getExternalType();
         }
     }
