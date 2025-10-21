@@ -132,6 +132,39 @@ class MyClass
 }
 ```
 
+### FilamentPHP UI
+This package comes with a UI generator which allows you to browse the system logs in a FilamentPHP Resource.
+
+The UI is generated so you're free to customise it as you please, or update it fom the latest version
+using `php artisan system-logs:install`.
+
+The System Logs benefit from a very wide screen, add this snippet to your panel provider to make the
+system logs page full width. Modify the path as necessary.
+
+```
+<?php
+
+namespace App\Providers\Filament;
+
+use Filament\Panel;
+use Filament\Support\Enums\Width;
+
+class AdminPanelProvider extends BasePanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            // ...
+            ->maxContentWidth((request()->path() === 'admin/system-logs') ? Width::Full : null);
+    }
+}
+
+```
+#### System Logs Listing
+![Picture of a list of system logs showing a table with columns of relevant data](/resources/img/system-logs-list.png)
+
+#### System Log Detail Page
+![Picture of a single system log showing a table of relevant data for a single item](/resources/img/system-log-detail.png)
 
 ## Testing
 
