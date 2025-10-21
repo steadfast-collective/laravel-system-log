@@ -1,6 +1,6 @@
 <?php
 
-namespace SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Tables;
+namespace App\Filament\Admin\Resources\SystemLogs\Tables;
 
 use App\Models\SystemLog;
 use Filament\Actions\BulkActionGroup;
@@ -28,6 +28,11 @@ class SystemLogsTable
                     ->label('Time')
                     ->searchable(isIndividual: true, isGlobal: true)
                     ->sortable(),
+                TextColumn::make('message')
+                    ->searchable(isIndividual: true, isGlobal: true)
+                    ->default('-')
+                    ->wrap()
+                    ->lineClamp(1),
                 TextColumn::make('internal_type')
                     ->label('Internal Type')
                     ->searchable(isIndividual: true, isGlobal: true)
@@ -63,11 +68,6 @@ class SystemLogsTable
                         'warning' => 'warning',
                         default => 'gray',
                     }),
-                TextColumn::make('message')
-                    ->searchable(isIndividual: true, isGlobal: true)
-                    ->default('-')
-                    ->wrap()
-                    ->lineClamp(1),
                 TextColumn::make('notes')
                     ->wrap()
                     ->default('-')
