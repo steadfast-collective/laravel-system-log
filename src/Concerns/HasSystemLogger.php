@@ -33,15 +33,15 @@ trait HasSystemLogger
             'context' => $context,
         ]);
 
-        if ($model) {
+        if (is_object($model)) {
             $this->inferFromClass($model);
-        }
 
-        // If this class has a method for formatting/prefixing log messages
-        // then use it. Designed for use with Steadfast Collective's (currently
-        // internal) HasLogger trait.
-        if (method_exists($model, 'makeLogMessage')) {
-            $message = $model->makeLogMessage($message);
+            // If this class has a method for formatting/prefixing log messages
+            // then use it. Designed for use with Steadfast Collective's (currently
+            // internal) HasLogger trait.
+            if (method_exists($model, 'makeLogMessage')) {
+                $message = $model->makeLogMessage($message);
+            }
         }
 
         Log::$level($message);
