@@ -123,16 +123,16 @@ trait HasSystemLoggerAssertions
     private function inferFromModelAssertionVersion(Model $model)
     {
         $return = [];
-        if (is_callable([$model, 'getInternalId'])) {
+        if (is_callable([$model, 'getInternalId']) && filled($model->getInternalId())) {
             $return['internal_id'] = $model->getInternalId();
         }
-        if (is_callable([$model, 'getInternalType'])) {
+        if (is_callable([$model, 'getInternalType']) && filled($model->getInternalType())) {
             $return['internal_type'] = $model->getInternalType();
         }
-        if (is_callable([$model, 'getExternalId'])) {
+        if (is_callable([$model, 'getExternalId']) && filled($model->getExternalId())) {
             $return['external_id'] = $model->getExternalId();
         }
-        if (is_callable([$model, 'getExternalType'])) {
+        if (is_callable([$model, 'getExternalType']) && filled($model->getExternalType())) {
             $return['external_type'] = $model->getExternalType();
         }
 

@@ -82,16 +82,16 @@ trait HasSystemLogger
      */
     private function inferFromClass(Model $model)
     {
-        if (is_callable([$model, 'getInternalId'])) {
+        if (is_callable([$model, 'getInternalId']) && filled($model->getInternalId())) {
             $this->newSystemLog->internal_id = $model->getInternalId();
         }
-        if (is_callable([$model, 'getInternalType'])) {
+        if (is_callable([$model, 'getInternalType']) && filled($model->getInternalType())) {
             $this->newSystemLog->internal_type = $model->getInternalType();
         }
-        if (is_callable([$model, 'getExternalId'])) {
+        if (is_callable([$model, 'getExternalId']) && filled($model->getExternalId())) {
             $this->newSystemLog->external_id = $model->getExternalId();
         }
-        if (is_callable([$model, 'getExternalType'])) {
+        if (is_callable([$model, 'getExternalType']) && filled($model->getExternalType())) {
             $this->newSystemLog->external_type = $model->getExternalType();
         }
     }
