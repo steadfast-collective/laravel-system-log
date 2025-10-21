@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use SteadfastCollective\LaravelSystemLog\Models\SystemLog as SteadfastSystemLog;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Prunable;
+use SteadfastCollective\LaravelSystemLog\Models\SystemLog as SteadfastSystemLog;
 
 /**
  * @property int $id
