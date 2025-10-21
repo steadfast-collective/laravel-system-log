@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\SystemLogs\Tables;
+namespace SteadfastCollective\LaravelSystemLog\Stubs\Filament\PanelName\Resources\SystemLogs\Tables;
 
 use App\Models\SystemLog;
 use Filament\Actions\BulkActionGroup;
