@@ -10,9 +10,9 @@ use SteadfastCollective\LaravelSystemLog\Tests\TestCase;
 
 class HasSystemLoggerTest extends TestCase
 {
+    use HasSpecificDatabaseHasAssertions;
     use HasSystemLogger;
     use HasSystemLoggerAssertions;
-    use HasSpecificDatabaseHasAssertions;
 
     public function test_create_simple_system_log_no_context()
     {
@@ -77,7 +77,7 @@ class HasSystemLoggerTest extends TestCase
 
     public function test_infer_does_nothing_if_inferring_methods_do_not_exist()
     {
-        $model = new TestModelWithoutHasSystemLogger();
+        $model = new TestModelWithoutHasSystemLogger;
 
         $this->addSystemLog(
             'This is a test message',
@@ -99,7 +99,7 @@ class HasSystemLoggerTest extends TestCase
      */
     public function test_make_log_message_is_used_for_logging()
     {
-        $model = new TestModelWithMakeLogMessage();
+        $model = new TestModelWithMakeLogMessage;
         $model->id = 1;
 
         Log::expects('info')
@@ -140,10 +140,7 @@ class TestModel extends Model
  *
  * @mixin \Eloquent
  */
-class TestModelWithoutHasSystemLogger extends Model
-{
-
-}
+class TestModelWithoutHasSystemLogger extends Model {}
 
 /**
  * @property int|null $id
@@ -152,7 +149,7 @@ class TestModelWithoutHasSystemLogger extends Model
  */
 class TestModelWithMakeLogMessage extends Model
 {
-    function makeLogMessage(string $message): string
+    public function makeLogMessage(string $message): string
     {
         return sprintf(
             '[%s#%s] %s',

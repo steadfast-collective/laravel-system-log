@@ -60,6 +60,7 @@ trait HasSystemLogger
         if (method_exists($this, 'getKey') && filled($this->getKey())) {
             return (string) $this->getKey();
         }
+
         return null;
     }
 
