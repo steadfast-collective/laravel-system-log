@@ -26,6 +26,7 @@ class SystemLogsTable
             ->columns([
                 TextColumn::make('created_at')
                     ->label('Time')
+                    // TODO: Format the date to your applications timezone
                     ->searchable(isIndividual: true, isGlobal: true)
                     ->sortable(),
                 TextColumn::make('message')

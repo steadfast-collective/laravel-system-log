@@ -29,13 +29,18 @@ class SystemLogForm
                 TextEntry::make('message')
                     ->state(fn (SystemLog $record): string => $record->message ?? ''),
                 KeyValueEntry::make('flat-context')
+                    ->label('Context')
                     ->default(function (SystemLog $systemLog) {
                         return Arr::dot($systemLog->context ?? []);
                     })
                     ->valueLabel('Info'),
                 TextArea::make('notes'),
                 Toggle::make('resolved'),
+                TextEntry::make('created_at')
+                    // TODO: Format the date to your applications timezone
+                    ->state(fn (SystemLog $record): string => $record->created_at ?? ''),
                 TextEntry::make('retried_at')
+                    // TODO: Format the date to your applications timezone
                     ->state(fn (SystemLog $record): string => $record->retried_at ?? ''),
                 TextEntry::make('retryingUser.name')
                     ->label('Retrying User')
