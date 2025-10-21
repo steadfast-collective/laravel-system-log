@@ -36,7 +36,12 @@ The generated model and panel are now ready for you to customise to fit into you
 You can add HasSystemLogger to any model you want to easily log from.
 
 ### Eloquent Model Example
-In this example we use SystemLogger to log when a local Eloquent model has been synced with an external API. We track the internal and external references.
+In this example we use SystemLogger to log when a local Eloquent model has been synced with an external API.
+
+We add `HasSystemLogger` to the both the Model and the API class. The Model so it can provide the internal/external ID details
+and the API class for convenient access.
+
+You could only use the system logger on the product and pass it in as the model, but I find this code more readable.
 
 ```php
 
@@ -78,8 +83,19 @@ class Product extends Model
     }
 }
 
-$product = new Product;
-$product->addSystemLog('Successfully Sunced',
+class SyncProduct
+{
+    function handle(Product $product)
+    {
+        $this->addSystemLog(
+            'Syncing Product',
+            model: $product,
+            context: [
+                'changedFields' = $product->getChanged(),
+            ],
+        );
+    }
+}
 
 ```
 

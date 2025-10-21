@@ -24,10 +24,10 @@ trait HasSystemLogger
         /** @var class-string<\SteadfastCollective\LaravelSystemLog\Models\SystemLog> $systemLogClass */
         $systemLogClass = config('system-log.class');
         $this->newSystemLog = new $systemLogClass([
-            'internal_type' => $internalType ?? $this->getInternalType(),
-            'internal_id' => $internalId ?? $this->getInternalId(),
-            'external_type' => $externalType ?? $this->getExternalType(),
-            'external_id' => $externalId ?? $this->getExternalId(),
+            'internal_type' => $internalType,
+            'internal_id' => $internalId,
+            'external_type' => $externalType,
+            'external_id' => $externalId,
             'log_level' => $level,
             'message' => $message,
             'context' => $context,
