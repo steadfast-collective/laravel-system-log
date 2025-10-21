@@ -6,9 +6,13 @@
 
 Provides a System Log model and helpers for contextful logging with FilamentPHP compatibility.
 
-The main interface for this package is the `HasSystemLogger` trait which can be added to any class you want to track.
+The main interface for this package is the `HasSystemLogger` trait which can be added to any class you want to track from
+to expose the `$this->addSystemLog()` method and to any object you want to pass as the `model` parameter to `addSystemLog`
+for some automatic context adding.
 
-For example you might add it to an Eloquent Model which is synced over an API and use it to track requests and problems.
+For example you might add it to an Eloquent Model and the Action which submits it to an external API to track API calls and data.
+
+There is also a `HasSystemLoggerAssertions` trait for use in tests to check that a SystemLog has been created.
 
 ## Installation
 
@@ -112,6 +116,32 @@ The `SystemLog` model will have some properties set:
 | log_level     | PSR-7 log levels (defaults to 'info')                       |                                                                |
 | message       | Any string of your choosing (required)                      | A description of what is being logged                          |
 | context       | An array of related data                                    | Any other data you want to include with this logger            |
+
+### Testing
+Use the `HasSystemLoggerAssertions` trait in your tests to assert that a SystemLog has (or has not) been created.
+
+```php
+use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLoggerAssertions;
+
+class ProductTest extends TestCase
+{
+    use HasSystemLoggerAssertions;
+
+    public function test_create_simple_system_log_no_context()
+    {
+        $product = new Product;
+        $product->id = 12345;
+
+        $product->doSomething();
+
+        // Check doSomething created a SystemLog
+        $this->assertSystemLogLogged(
+            message: 'This is a test message',
+            model: $product
+        );
+    }
+}
+```
 
 ### Formatting your log lines
 When you create a SystemLog the message will also be logged to the standard Larvel logger.
