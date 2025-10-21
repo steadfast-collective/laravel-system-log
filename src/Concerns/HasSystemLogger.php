@@ -54,9 +54,13 @@ trait HasSystemLogger
         return $this->newSystemLog;
     }
 
-    public function getInternalId(): string
+    public function getInternalId(): ?string
     {
-        return (string) $this->getKey();
+        /** @phpstan-ignore-next-line function.alreadyNarrowedType */
+        if (method_exists($this, 'getKey') && filled($this->getKey())) {
+            return (string) $this->getKey();
+        }
+        return null;
     }
 
     public function getInternalType(): string
