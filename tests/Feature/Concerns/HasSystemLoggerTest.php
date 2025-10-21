@@ -60,7 +60,6 @@ class HasSystemLoggerTest extends TestCase
 
     public function test_infer_from_model_uses_null_for_empty_strings()
     {
-
         $model = new TestModel;
         $model->my_external_id = '';
 
@@ -122,6 +121,7 @@ class HasSystemLoggerTest extends TestCase
 }
 /**
  * @property int|null $id
+ * @property string|null $my_external_id
  *
  * @mixin \Eloquent
  */
