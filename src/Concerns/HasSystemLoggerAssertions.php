@@ -11,8 +11,8 @@ trait HasSystemLoggerAssertions
         ?string $message = null,
         ?string $level = null,
         ?array $context = null,
-        ?string $internalType = null,
-        ?string $internalId = null,
+        string|int|null $internalType = null,
+        string|int|null $internalId = null,
         ?string $externalType = null,
         ?string $externalId = null,
         ?Model $model = null,
@@ -34,11 +34,11 @@ trait HasSystemLoggerAssertions
 
         if ($internalType || $internalId) {
             throw_if(empty($internalType) || empty($internalId), 'Please specify both internalType and internalID as a pair');
-            $expected['internal_type'] = $internalType;
-            $where['internal_type'] = $internalType;
+            $expected['internal_type'] = (string) $internalType;
+            $where['internal_type'] = (string) $internalType;
 
-            $expected['internal_id'] = $internalId;
-            $where['internal_id'] = $internalId;
+            $expected['internal_id'] = (string) $internalId;
+            $where['internal_id'] = (string) $internalId;
         }
 
         if ($externalType || $externalId) {
@@ -123,16 +123,18 @@ trait HasSystemLoggerAssertions
     private function inferFromModelAssertionVersion(Model $model)
     {
         $return = [];
-        $return['internal_type'] = $model::class;
-        $return['internal_id'] = (string) $model->getKey();
-
-        // TODO: Packagise the way to customise external type mappings
-        // switch ($model::class) {
-        //     case \App\Models\Document::class:
-        //         $return['external_type'] = 'DualLedgerEntry';
-        //         $return['external_id'] = $model->cenpac_document_ref;
-        //         break;
-        // }
+        if (is_callable([$model, 'getInternalId'])) {
+            $return['internal_id'] = $model->getInternalId();
+        }
+        if (is_callable([$model, 'getInternalType'])) {
+            $return['internal_type'] = $model->getInternalType();
+        }
+        if (is_callable([$model, 'getExternalId'])) {
+            $return['external_id'] = $model->getExternalId();
+        }
+        if (is_callable([$model, 'getExternalType'])) {
+            $return['external_type'] = $model->getExternalType();
+        }
 
         return $return;
     }
