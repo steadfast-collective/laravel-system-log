@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use SteadfastCollective\LaravelSystemLog\Models\SystemLog as SteadfastSystemLog;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Prunable;
 
 /**
  * @property int $id
@@ -41,4 +43,12 @@ use SteadfastCollective\LaravelSystemLog\Models\SystemLog as SteadfastSystemLog;
  *
  * @mixin \Eloquent
  */
-class SystemLog extends SteadfastSystemLog {}
+class SystemLog extends SteadfastSystemLog
+{
+    use Prunable;
+
+    public function prunable(): Builder
+    {
+        return static::where('created_at', '<=', now()->subMonth());
+    }
+}
