@@ -84,7 +84,7 @@ class SystemLogsTable
                     ->using(DatePicker::class, 'Time'),
                 SelectFilter::make('internal_type')
                     ->multiple()
-                    ->label('Cedars Type')
+                    ->label('External Type')
                     ->options(function () {
                         // raw query the SystemLog table to get the distinct values of the internal_type column (cache it into a variable, then return it)
                         $options = Cache::remember('system-log-internal-type-options', now()->addDay(), function () {
@@ -94,7 +94,7 @@ class SystemLogsTable
                         return array_combine($options, $options);
                     }),
                 SelectFilter::make('external_type')
-                    ->label('BC Type')
+                    ->label('External Type')
                     ->multiple()
                     ->options(function () {
                         // raw query the SystemLog table to get the distinct values of the external_type column (cache it into a variable, then return it)
