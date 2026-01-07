@@ -14,6 +14,7 @@ trait HasSystemLogger
     public function addSystemLog(
         string $message,
         string $level = 'info',
+        ?string $code = null,
         ?array $context = null,
         ?string $internalType = null,
         ?string $internalId = null,
@@ -29,6 +30,7 @@ trait HasSystemLogger
             'external_type' => $externalType,
             'external_id' => $externalId,
             'log_level' => $level,
+            'code' => $code,
             'message' => $message,
             'context' => $context,
         ]);
