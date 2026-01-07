@@ -48,6 +48,16 @@ class HasSystemLoggerTest extends TestCase
 
         $this->assertSystemLogLogged(
             message: 'This is a test message',
+            code: 'API-1001',
+            internalType: 'SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\TestModel',
+            internalId: '12345',
+            externalType: 'TestModel',
+            externalId: 'my_external_id',
+        );
+
+        // Also check assertSystemLogLogged accepts an enum
+        $this->assertSystemLogLogged(
+            message: 'This is a test message',
             code: TestSystemLogCodes::API_RATE_LIMIT_EXCEEDED,
             internalType: 'SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\TestModel',
             internalId: '12345',

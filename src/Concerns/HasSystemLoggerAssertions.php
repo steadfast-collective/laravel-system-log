@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use SteadfastCollective\LaravelSystemLog\Models\SystemLog;
 use UnitEnum;
 
+use function Illuminate\Support\enum_value;
+
 trait HasSystemLoggerAssertions
 {
     public function assertSystemLogLogged(
@@ -29,8 +31,8 @@ trait HasSystemLoggerAssertions
         }
 
         if ($code) {
-            $expected['code'] = $code;
-            $where['code'] = $code;
+            $expected['code'] = enum_value($code);
+            $where['code'] = enum_value($code);
         }
 
         if ($model) {

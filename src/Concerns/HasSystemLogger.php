@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use UnitEnum;
 
+use function Illuminate\Support\enum_value;
+
 trait HasSystemLogger
 {
     /** @var \SteadfastCollective\LaravelSystemLog\Models\SystemLog */
@@ -31,7 +33,7 @@ trait HasSystemLogger
             'external_type' => $externalType,
             'external_id' => $externalId,
             'log_level' => $level,
-            'code' => $code,
+            'code' => enum_value($code),
             'message' => $message,
             'context' => $context,
         ]);
