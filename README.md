@@ -114,7 +114,7 @@ The `SystemLog` model will have some properties set:
 | external_id.  | Defaults to null - create getExternalId() to set            | A unique identifier for this object in a remote system.             |
 | external_type | Defaults to internal_type - create getExternalType() to set | A descriptive name for this type of object in a remote system       |
 | log_level     | PSR-7 log levels (defaults to 'info')                       |                                                                     |
-| code          | Any string of your choosing (required)                      | A code which represents what type of item this is (e.g. SYNC_ERROR) |
+| code          | Any string of your choosing                                 | A code which represents what type of item this is (e.g. SYNC_ERROR) |
 | message       | Any string of your choosing (required)                      | A description of what is being logged                               |
 | context       | An array of related data                                    | Any other data you want to include with this logger                 |
 
