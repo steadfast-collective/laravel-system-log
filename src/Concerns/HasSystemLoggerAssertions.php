@@ -11,9 +11,9 @@ use function Illuminate\Support\enum_value;
 trait HasSystemLoggerAssertions
 {
     public function assertSystemLogLogged(
-        null|string|UnitEnum $code = null,
         ?string $message = null,
         ?string $level = null,
+        null|string|UnitEnum $code = null,
         ?array $context = null,
         string|int|null $internalType = null,
         string|int|null $internalId = null,
