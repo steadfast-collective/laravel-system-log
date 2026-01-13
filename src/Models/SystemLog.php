@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string|null $external_id
  * @property string|null $log_level
  * @property string|null $message
+ * @property string|null $code
  * @property array|null $context
  * @property string|null $notes
  * @property string|null $retried_at
@@ -31,6 +32,7 @@ class SystemLog extends Model
         'external_type',
         'external_id',
         'log_level',
+        'code',
         'message',
         'context',
         'notes',

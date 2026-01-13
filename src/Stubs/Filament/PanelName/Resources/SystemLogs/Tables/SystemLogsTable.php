@@ -29,6 +29,10 @@ class SystemLogsTable
                     // TODO: Format the date to your applications timezone
                     ->searchable(isIndividual: true, isGlobal: true)
                     ->sortable(),
+                TextColumn::make('code')
+                    ->searchable(isIndividual: true, isGlobal: true)
+                    ->default('-')
+                    ->sortable(),
                 TextColumn::make('message')
                     ->searchable(isIndividual: true, isGlobal: true)
                     ->default('-')
@@ -82,6 +86,14 @@ class SystemLogsTable
                 // Time Filter/Created At Filter
                 RangeFilter::make('created_at')
                     ->using(DatePicker::class, 'Time'),
+                SelectFilter::make('code')
+                    ->multiple()
+                    ->label('Code')
+                    ->options(function () {
+                        $options = SystemLog::distinct('code')->pluck('code')->filter()->toArray();
+
+                        return array_combine($options, $options);
+                    }),
                 SelectFilter::make('internal_type')
                     ->multiple()
                     ->label('External Type')

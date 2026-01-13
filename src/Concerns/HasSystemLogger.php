@@ -5,6 +5,9 @@ namespace SteadfastCollective\LaravelSystemLog\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use UnitEnum;
+
+use function Illuminate\Support\enum_value;
 
 trait HasSystemLogger
 {
@@ -14,6 +17,7 @@ trait HasSystemLogger
     public function addSystemLog(
         string $message,
         string $level = 'info',
+        null|string|UnitEnum $code = null,
         ?array $context = null,
         ?string $internalType = null,
         ?string $internalId = null,
@@ -29,6 +33,7 @@ trait HasSystemLogger
             'external_type' => $externalType,
             'external_id' => $externalId,
             'log_level' => $level,
+            'code' => enum_value($code),
             'message' => $message,
             'context' => $context,
         ]);
