@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('external_type')->nullable()->index();
             $table->string('external_id')->nullable()->index();
             $table->string('log_level')->nullable()->index();
+            $table->string('code')->nullable()->index();
             $table->string('message')->nullable();
             $table->json('context')->nullable();
             $table->string('notes')->nullable()->index();
