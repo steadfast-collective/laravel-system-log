@@ -81,7 +81,7 @@ trait HasSystemLoggerAssertions
             $normalizedExpected = Arr::sortRecursive($context);
             $normalizedActual = Arr::sortRecursive($actualContext);
 
-            $this->assertEqualsCanonicalizing(
+            $this->assertEquals(
                 $normalizedExpected,
                 $normalizedActual,
                 'The context was not right',
