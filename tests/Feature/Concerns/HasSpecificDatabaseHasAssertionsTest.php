@@ -175,7 +175,6 @@ class HasSpecificDatabaseHasAssertionsTest extends TestCase
     }
 }
 
-
 /**
  * @property int|null $id
  * @property string|null $my_external_id
