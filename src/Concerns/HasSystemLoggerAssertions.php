@@ -3,13 +3,18 @@
 namespace SteadfastCollective\LaravelSystemLog\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use SteadfastCollective\LaravelSystemLog\Models\SystemLog;
+use UnitEnum;
+
+use function Illuminate\Support\enum_value;
 
 trait HasSystemLoggerAssertions
 {
     public function assertSystemLogLogged(
         ?string $message = null,
         ?string $level = null,
+        null|string|UnitEnum $code = null,
         ?array $context = null,
         string|int|null $internalType = null,
         string|int|null $internalId = null,
@@ -24,6 +29,11 @@ trait HasSystemLoggerAssertions
         if ($message) {
             $expected['message'] = $message;
             $where['message'] = $message;
+        }
+
+        if ($code) {
+            $expected['code'] = enum_value($code);
+            $where['code'] = enum_value($code);
         }
 
         if ($model) {
@@ -76,18 +86,13 @@ trait HasSystemLoggerAssertions
         if ($context) {
             $actualContext = $expectedSystemLog->context;
 
-            // Sort the fields so the comparison is order-insensitive
-            if (is_string(array_keys($context)[0])) {
-                ksort($context);
-                ksort($actualContext);
-            } else {
-                sort($context);
-                sort($actualContext);
-            }
+            // Normalize both arrays recursively so comparison is order-insensitive
+            $normalizedExpected = Arr::sortRecursive($context);
+            $normalizedActual = Arr::sortRecursive($actualContext);
 
-            $this->assertEqualsCanonicalizing(
-                $context,
-                $actualContext,
+            $this->assertEquals(
+                $normalizedExpected,
+                $normalizedActual,
                 'The context was not right',
             );
         }
