@@ -5,6 +5,7 @@ namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\HasSpecifi
 use Illuminate\Database\Eloquent\Model;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLogger;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLoggerAssertions;
+use SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\HasSpecificDatabaseHasAssertions;
 use SteadfastCollective\LaravelSystemLog\Tests\TestCase;
 
 class AssertContextNormalisationTest extends TestCase
@@ -139,6 +140,37 @@ class AssertContextNormalisationTest extends TestCase
             message: 'Test message',
             context: [
                 'key' => 'different_value',
+            ]
+        );
+    }
+
+    /**
+     * Test that indexed arrays are sorted by their values, not just keys
+     * This documents intentional behavior: Arr::sortRecursive sorts indexed array values
+     * so ['c', 'b', 'a'] becomes ['a', 'b', 'c'] before comparison.
+     * This makes assertions order-insensitive for indexed arrays.
+     */
+    public function test_context_assertion_sorts_indexed_array_values()
+    {
+        $model = new TestModelForAssertions;
+        $model->id = 4;
+
+        // Log with indexed array in specific order
+        $this->addSystemLog(
+            'Test message',
+            model: $model,
+            context: [
+                'tags' => ['zebra', 'apple', 'mango'],
+                'priority_list' => ['low', 'high', 'medium'],
+            ]
+        );
+
+        // Assert with different order - should pass because values are sorted
+        $this->assertSystemLogLogged(
+            message: 'Test message',
+            context: [
+                'tags' => ['apple', 'mango', 'zebra'],
+                'priority_list' => ['high', 'low', 'medium'],
             ]
         );
     }
