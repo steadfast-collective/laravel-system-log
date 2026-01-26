@@ -1,6 +1,6 @@
 <?php
 
-namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns;
+namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\HasSpecificDatabaseHasAssertions;
 
 use Illuminate\Database\Eloquent\Model;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLogger;
