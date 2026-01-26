@@ -5,12 +5,16 @@ namespace SteadfastCollective\LaravelSystemLog\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use SteadfastCollective\LaravelSystemLog\Models\SystemLog;
+use UnitEnum;
+
+use function Illuminate\Support\enum_value;
 
 trait HasSystemLoggerAssertions
 {
     public function assertSystemLogLogged(
         ?string $message = null,
         ?string $level = null,
+        null|string|UnitEnum $code = null,
         ?array $context = null,
         string|int|null $internalType = null,
         string|int|null $internalId = null,
@@ -25,6 +29,11 @@ trait HasSystemLoggerAssertions
         if ($message) {
             $expected['message'] = $message;
             $where['message'] = $message;
+        }
+
+        if ($code) {
+            $expected['code'] = enum_value($code);
+            $where['code'] = enum_value($code);
         }
 
         if ($model) {
