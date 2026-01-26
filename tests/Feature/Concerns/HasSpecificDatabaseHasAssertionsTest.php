@@ -1,13 +1,13 @@
 <?php
 
-namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns\HasSpecificDatabaseHasAssertions;
+namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLogger;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLoggerAssertions;
 use SteadfastCollective\LaravelSystemLog\Tests\TestCase;
 
-class AssertContextNormalisationTest extends TestCase
+class HasSpecificDatabaseHasAssertionsTest extends TestCase
 {
     use HasSpecificDatabaseHasAssertions;
     use HasSystemLogger;
