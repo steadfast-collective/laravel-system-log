@@ -96,7 +96,7 @@ class SystemLogsTable
                     }),
                 SelectFilter::make('internal_type')
                     ->multiple()
-                    ->label('External Type')
+                    ->label('Internal Type')
                     ->options(function () {
                         // raw query the SystemLog table to get the distinct values of the internal_type column (cache it into a variable, then return it)
                         $options = Cache::remember('system-log-internal-type-options', now()->addDay(), function () {
