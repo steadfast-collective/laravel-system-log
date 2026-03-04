@@ -5,6 +5,7 @@ namespace SteadfastCollective\LaravelSystemLog\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use SteadfastCollective\LaravelSystemLog\Contracts\SystemLoggableContract;
 use UnitEnum;
 
 use function Illuminate\Support\enum_value;
@@ -23,7 +24,7 @@ trait HasSystemLogger
         ?string $internalId = null,
         ?string $externalType = null,
         ?string $externalId = null,
-        ?Model $model = null,
+        null|Model|SystemLoggableContract $model = null,
     ) {
         /** @var class-string<\SteadfastCollective\LaravelSystemLog\Models\SystemLog> $systemLogClass */
         $systemLogClass = config('system-log.class');
@@ -90,7 +91,7 @@ trait HasSystemLogger
      * the internal/external types and IDs every time. This method infers those values
      * from the given object and updates the new system log.
      */
-    private function inferFromClass(Model $model)
+    private function inferFromClass(Model|SystemLoggableContract $model)
     {
         if (method_exists($model, 'getInternalId') && filled($model->getInternalId())) {
             $this->newSystemLog->internal_id = $model->getInternalId();

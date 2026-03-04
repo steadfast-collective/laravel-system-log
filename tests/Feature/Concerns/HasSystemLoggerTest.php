@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLogger;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLoggerAssertions;
+use SteadfastCollective\LaravelSystemLog\Contracts\SystemLoggableContract;
 use SteadfastCollective\LaravelSystemLog\Tests\TestCase;
 
 class HasSystemLoggerTest extends TestCase
@@ -32,6 +33,26 @@ class HasSystemLoggerTest extends TestCase
             internalId: '12345',
             externalType: 'TestModel',
             externalId: 'my_external_id',
+        );
+    }
+
+    public function test_create_simple_system_log_from_non_eloquent_model()
+    {
+        $model = new TestObjectNotModelButWithContract;
+
+        $this->addSystemLog(
+            message: 'This is a test message',
+            code: 'SOME_CODE',
+            model: $model,
+        );
+
+        $this->assertSystemLogLogged(
+            message: 'This is a test message',
+            code: 'SOME_CODE',
+            internalType: 'internal_type',
+            internalId: 'internal_id',
+            externalType: 'external_type',
+            externalId: 'external_id',
         );
     }
 
@@ -190,6 +211,34 @@ class TestModelWithMakeLogMessage extends Model
             $this->id,
             $message
         );
+    }
+}
+
+/**
+ * @property int|null $id
+ *
+ * @mixin \Eloquent
+ */
+class TestObjectNotModelButWithContract implements SystemLoggableContract
+{
+    public function getInternalId(): ?string
+    {
+        return 'internal_id';
+    }
+
+    public function getInternalType(): string
+    {
+        return 'internal_type';
+    }
+
+    public function getExternalId(): ?string
+    {
+        return 'external_id';
+    }
+
+    public function getExternalType(): string
+    {
+        return 'external_type';
     }
 }
 
