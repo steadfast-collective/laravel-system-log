@@ -17,10 +17,6 @@ Those methods are:
 - public function getExternalId(): ?string;
 - public function getExternalType(): string;
 
-## v1.3 - 2026-03-04
-
-- Allow passing any `SystemLoggableContract` as the `model` parameter to HasSystemLogger::addSystemLog
-
 ## v1.2 - 2026-01-07
 
 - Added `code` field to SystemLog
