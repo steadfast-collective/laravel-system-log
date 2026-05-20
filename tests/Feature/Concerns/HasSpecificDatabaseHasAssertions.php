@@ -105,7 +105,7 @@ trait HasSpecificDatabaseHasAssertions
                 'message' => $attributes['message'],
             ];
         } else {
-            throw new \Exception('I only know how to match a SystemLog using internal details, or message');
+            throw new Exception('I only know how to match a SystemLog using internal details, or message');
         }
         $this->assertDatabaseHasRow(SystemLog::class, $attributes, $matchingData);
 

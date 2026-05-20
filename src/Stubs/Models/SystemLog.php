@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Support\Carbon;
 use SteadfastCollective\LaravelSystemLog\Models\SystemLog as SteadfastSystemLog;
 
 /**
@@ -16,12 +18,12 @@ use SteadfastCollective\LaravelSystemLog\Models\SystemLog as SteadfastSystemLog;
  * @property string|null $message
  * @property array<array-key, mixed>|null $context
  * @property string|null $notes
- * @property \Illuminate\Support\Carbon|null $retried_at
+ * @property Carbon|null $retried_at
  * @property string|null $retried_by
  * @property bool|null $resolved
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent|null $internalModel
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Model|\Eloquent|null $internalModel
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemLog newQuery()
