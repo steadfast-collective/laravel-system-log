@@ -8,6 +8,8 @@ on:
       - "phpunit.xml.dist"
       - "composer.json"
       - "composer.lock"
+  pull_request:
+    types: [opened, synchronize, reopened, converted_to_draft]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
