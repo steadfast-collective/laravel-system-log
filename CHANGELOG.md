@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-system-log` will be documented in this file.
 
+## v1.4 Add Laravel 13 Support - 2026-05-20
+
+### What's Changed
+
+* Laravel 13 Support by @Patabugen in https://github.com/steadfast-collective/laravel-system-log/pull/15
+
+**Full Changelog**: https://github.com/steadfast-collective/laravel-system-log/compare/v1.3...v1.4
+
 ## v1.3 Pass SystemLoggableContract to addSystemLog - 2026-03-04
 
 ### What's Changed
