@@ -56,7 +56,7 @@ trait HasSpecificDatabaseHasAssertions
             // If we can't be clever, throw the normal exception.
             if ($probableMatches->isEmpty()) {
                 throw new ExpectationFailedException("{$e->getMessage()} (No probable match found)", $e->getComparisonFailure());
-            } elseif (! $probableMatches->containsOneItem()) {
+            } elseif (! $probableMatches->hasSole()) {
                 throw new ExpectationFailedException("{$e->getMessage()} (More than one probable matches found)", $e->getComparisonFailure());
             }
             $probableMatch = (array) $probableMatches->first();
