@@ -8,6 +8,8 @@ on:
       - "phpunit.xml.dist"
       - "composer.json"
       - "composer.lock"
+  pull_request:
+    types: [opened, synchronize, reopened, converted_to_draft]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,12 +23,14 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.3, 8.4]
-        laravel: [12.*]
+        laravel: [12.*, 13.*]
         filament: [4.*, 5.*]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 12.*
             testbench: 10.*
+          - laravel: 13.*
+            testbench: 11.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - F${{ matrix.filament }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
