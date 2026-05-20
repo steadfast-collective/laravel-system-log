@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\SystemLog;
+
 return [
-    'class' => App\Models\SystemLog::class,
+    'class' => SystemLog::class,
 ];

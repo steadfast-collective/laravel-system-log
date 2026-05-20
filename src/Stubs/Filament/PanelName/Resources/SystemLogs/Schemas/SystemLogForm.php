@@ -34,7 +34,7 @@ class SystemLogForm
                         return Arr::dot($systemLog->context ?? []);
                     })
                     ->valueLabel('Info'),
-                TextArea::make('notes'),
+                Textarea::make('notes'),
                 Toggle::make('resolved'),
                 TextEntry::make('created_at')
                     // TODO: Format the date to your applications timezone

@@ -3,6 +3,7 @@
 namespace SteadfastCollective\LaravelSystemLog\Tests\Feature\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\AssertionFailedError;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLogger;
 use SteadfastCollective\LaravelSystemLog\Concerns\HasSystemLoggerAssertions;
 use SteadfastCollective\LaravelSystemLog\Tests\TestCase;
@@ -121,7 +122,7 @@ class HasSpecificDatabaseHasAssertionsTest extends TestCase
      */
     public function test_context_assertion_fails_when_values_differ()
     {
-        $this->expectException(\PHPUnit\Framework\AssertionFailedError::class);
+        $this->expectException(AssertionFailedError::class);
 
         $model = new TestModelForAssertions;
         $model->id = 3;

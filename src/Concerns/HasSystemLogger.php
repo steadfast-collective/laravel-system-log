@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use SteadfastCollective\LaravelSystemLog\Contracts\SystemLoggableContract;
+use SteadfastCollective\LaravelSystemLog\Models\SystemLog;
 use UnitEnum;
 
 use function Illuminate\Support\enum_value;
 
 trait HasSystemLogger
 {
-    /** @var \SteadfastCollective\LaravelSystemLog\Models\SystemLog */
+    /** @var SystemLog */
     private $newSystemLog;
 
     public function addSystemLog(
@@ -26,7 +27,7 @@ trait HasSystemLogger
         ?string $externalId = null,
         null|Model|SystemLoggableContract $model = null,
     ) {
-        /** @var class-string<\SteadfastCollective\LaravelSystemLog\Models\SystemLog> $systemLogClass */
+        /** @var class-string<SystemLog> $systemLogClass */
         $systemLogClass = config('system-log.class');
         $this->newSystemLog = new $systemLogClass([
             'internal_type' => $internalType,
