@@ -27,6 +27,9 @@ trait HasSystemLogger
         ?string $externalId = null,
         null|Model|SystemLoggableContract $model = null,
     ) {
+        // Make sure the message is less than MySQL's maximum for a text field
+        $message = mb_strcut($message, 0, 60_000, 'UTF-8');
+
         /** @var class-string<SystemLog> $systemLogClass */
         $systemLogClass = config('system-log.class');
         $this->newSystemLog = new $systemLogClass([

@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-system-log` will be documented in this file.
 
+## v1.5 Avoid MySQL insertion errors on very long 'message' values - 2026-09-04
+
+Make sure the message is less than MySQL's maximum for a text field to avoid insertion errors on huge 'message' (e.g. from exceptions being logged with their traces).
+
 ## v1.4 Add Laravel 13 Support - 2026-05-20
 
 ### What's Changed
