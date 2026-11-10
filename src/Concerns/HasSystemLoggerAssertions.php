@@ -72,11 +72,9 @@ trait HasSystemLoggerAssertions
         // If we didn't find anything and if we can call the assertDatabaseHasSystemLog method, call it
         // because it gives nicer output. If we did find something, this is skipped and we check the context.
         if (! is_a($expectedSystemLog, SystemLog::class)) {
-            /** @phpstan-ignore-next-line function.alreadyNarrowedType */
-            if (is_callable([$this, 'assertDatabaseHasSystemLog'])) {
+            if ($this->hasSystemLogDatabaseAssertion($this)) {
                 $this->assertDatabaseHasSystemLog($expected);
                 $this->fail('assertDatabaseHasSystemLog did not fail, which means a mixup in expected logic between the two traits');
-                /** @phpstan-ignore-next-line */
             } else {
                 $this->fail('SystemLog not found. Add HasSpecificDatabaseHasAssertions to your test class for more output');
             }
@@ -117,6 +115,11 @@ trait HasSystemLoggerAssertions
         }
 
         $this->assertDatabaseMissing('system_logs', $data);
+    }
+
+    private function hasSystemLogDatabaseAssertion(object $testCase): bool
+    {
+        return is_callable([$testCase, 'assertDatabaseHasSystemLog']);
     }
 
     /**
